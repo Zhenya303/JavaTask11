@@ -4,6 +4,7 @@ public class Radio {
 
     public int getCurrentStation() {
         return currentStation;
+
     }
 
     public void setCurrentStation(int newCurrentStation) {
