@@ -3,6 +3,17 @@ import org.junit.jupiter.api.Test;
 import ru.netology.radio.Radio;
 
 public class RadioTest {
+
+    @Test
+
+    public void testRadioStation() {
+
+        Radio radio = new Radio();
+
+        Assertions.assertEquals(0, radio.getCurrentStation());
+
+    }
+
     @Test
 
     public void shouldSetStation() {
@@ -15,7 +26,6 @@ public class RadioTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
 
     @Test
 
@@ -51,11 +61,11 @@ public class RadioTest {
     public void shouldTurnNextStation() {
 
         Radio radio = new Radio();
-        radio.setCurrentStation(5);
+        radio.setCurrentStation(7);
 
         radio.turnNextStation();
 
-        int expected = 6;
+        int expected = 8;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -66,11 +76,11 @@ public class RadioTest {
     public void shouldTurnPrevStation() {
 
         Radio radio = new Radio();
-        radio.setCurrentStation(5);
+        radio.setCurrentStation(7);
 
         radio.turnPrevStation();
 
-        int expected = 4;
+        int expected = 6;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
@@ -78,7 +88,7 @@ public class RadioTest {
 
     @Test
 
-    public void shouldTurnNextStationFrom9To0() {
+    public void shouldTurnNextStationFromLastToFirst() {
 
         Radio radio = new Radio();
         radio.setCurrentStation(9);
@@ -93,7 +103,7 @@ public class RadioTest {
 
     @Test
 
-    public void shouldTurnPrevStationFrom0To9() {
+    public void shouldTurnPrevStationFromFirstToLast() {
 
         Radio radio = new Radio();
         radio.setCurrentStation(0);
@@ -101,6 +111,110 @@ public class RadioTest {
         radio.turnPrevStation();
 
         int expected = 9;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
+
+    public void shouldSetStationCount20() {
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(18);
+
+        int expected = 18;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    @Test
+
+    public void shouldNotSetStationCount20AboveMax() {
+
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(22);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+    @Test
+
+    public void shouldNotSetStationCount20BelowMin() {
+
+        Radio radio = new Radio(20);
+
+        radio.setCurrentStation(-1);
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+
+    public void shouldTurnNextStationCount20() {
+
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(15);
+
+        radio.turnNextStation();
+
+        int expected = 16;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+
+    public void shouldTurnPrevStationCount20() {
+
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(15);
+
+        radio.turnPrevStation();
+
+        int expected = 14;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+
+    public void shouldTurnNextStationCount20FromLastToFirst() {
+
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(19);
+
+        radio.turnNextStation();
+
+        int expected = 0;
+        int actual = radio.getCurrentStation();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+
+    public void shouldTurnPrevStationCount20FromFirstToLast() {
+
+        Radio radio = new Radio(20);
+        radio.setCurrentStation(0);
+
+        radio.turnPrevStation();
+
+        int expected = 19;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
